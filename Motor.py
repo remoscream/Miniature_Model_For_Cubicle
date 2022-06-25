@@ -4,9 +4,13 @@
 
 import time
 import RPi.GPIO as GPIO
+import relay_lib_seeed as relay
 
 
 length = 5     # mm
+
+relay_port = 2
+relay.relay_off(relay_port)
 
 coe = 0.23  # 10 mm per 40 second (0.25mm/1s)
 
@@ -44,7 +48,11 @@ StepCounter = 0
 # Start main loop
 if __name__ == "__main__":
     try:
+        relay.relay_on(relay_port)
+        print('Motor power on')
+
         timeticnow = 0
+
         while True:
             for pin in range(0, 4):
                 xpin = StepPins[pin]
@@ -57,9 +65,9 @@ if __name__ == "__main__":
 
             # If we reach the end of the sequence
             # start again
-            if (StepCounter >= StepCount):
+            if StepCounter >= StepCount:
                 StepCounter = 0
-            if (StepCounter < 0):
+            if StepCounter < 0:
                 StepCounter = StepCount + StepDir
 
             # Wait before moving on
@@ -73,10 +81,13 @@ if __name__ == "__main__":
 
         for pin in StepPins:
             GPIO.output(pin, False)
-        print('Motor stop')
+
+        relay.relay_off(relay_port)
+        print('Motor stop, power off')
 
     except KeyboardInterrupt:
         for pin in StepPins:
             GPIO.output(pin, False)
+        relay.relay_off(relay_port)
 
-        print('Motor stop by keyboard input')
+        print('Motor stop by keyboard input, power off')
