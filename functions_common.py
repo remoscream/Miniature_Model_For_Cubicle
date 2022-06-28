@@ -2,6 +2,10 @@ import csv
 from datetime import datetime
 
 
+def read_csv_as_list(filepath):
+    with open(filepath, newline='') as f:
+        return list(csv.reader(f, quoting=csv.QUOTE_NONNUMERIC))
+
 def save_list_to_csv(filepath, data):
     with open(filepath, 'w') as f:
         writer = csv.writer(f)
