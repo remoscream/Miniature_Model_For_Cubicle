@@ -27,8 +27,7 @@ for pin in StepPins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, False)
 
-# Define advanced sequence
-# as shown in manufacturers datasheet
+# Define advanced sequence as shown in manufacturers datasheet
 Seq = [[1, 0, 0, 1],
        [1, 0, 0, 0],
        [1, 1, 0, 0],
@@ -79,6 +78,7 @@ if __name__ == "__main__":
             if posnow >= length:
                 break
 
+        # Stop signal and cut power of motor
         for pin in StepPins:
             GPIO.output(pin, False)
 
