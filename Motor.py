@@ -1,5 +1,14 @@
-# --------------------------------------
-# https://bitbucket.org/MattHawkinsUK/rpispy-misc/raw/master/python/stepper.py
+"""
+Program referenced from :
+https://bitbucket.org/MattHawkinsUK/rpispy-misc/raw/master/python/stepper.py
+
+Attention : Original program is python 2.x
+
+I add a coefficient for transform running time to distance (accuracy not high)
+
+Motor power controled by a relay module,
+power will be reset when start running, and switch after initialization.
+"""
 
 
 import time
@@ -8,11 +17,11 @@ import relay_lib_seeed as relay
 
 
 length = 5     # mm
+coe = 0.23  # 10 mm per 40 second (0.25mm/1s)
 
+# Reset motor power
 relay_port = 2
 relay.relay_off(relay_port)
-
-coe = 0.23  # 10 mm per 40 second (0.25mm/1s)
 
 # Use BCM GPIO references instead of physical pin numbers
 GPIO.setmode(GPIO.BCM)

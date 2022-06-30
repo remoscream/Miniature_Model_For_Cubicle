@@ -1,7 +1,7 @@
 """
 Program for resize a 8x8 thermal graphic from AMG8833 by a new resolution
 
-Original program is from:
+Referenced program of scipy.griddata is from:
 https://stackoverflow.com/questions/50330251/how-to-merge-mesh-grid-points-from-two-rectangles-in-python
 https://qiita.com/shu32/items/f19635eab402ea6fc44e
 
